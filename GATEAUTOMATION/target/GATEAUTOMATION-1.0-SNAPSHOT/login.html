@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient from vehic.html */
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Form Styling with Glassmorphism */
+        form {
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+            width: 350px;
+            text-align: center;
+            animation: float 4s ease-in-out infinite, fadeIn 1.5s ease-in-out;
+        }
+
+        /* Input Field Styling */
+        input {
+            margin: 15px 0;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            color: white; /* White text */
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* Placeholder text color */
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3); /* Slightly brighter on focus */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Glow effect */
+            transform: scale(1.02); /* Slight scale-up */
+            outline: none; /* Remove default outline */
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3); /* Brighter on hover */
+            transform: scale(1.05); /* Slight scale-up */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Glow effect */
+        }
+
+        /* Heading Styling */
+        h2 {
+            margin-bottom: 25px;
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        /* Floating Animation for Form */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Fade-In Animation for Form */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Text Glow Animation for Heading */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            }
+        }
+
+        /* Background Animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            animation: rotate 12s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Additional Background Particles */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.1%);
+            background-size: 20px 20px;
+            animation: particles 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes particles {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="LoginServlet" method="post">
+        <h2>Admin Login</h2>
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h2, h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+        }
+
+        .button-container button {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .button-container button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Blue Glassmorphism for Add Vehicle Button */
+        .button-container .addvehicle-btn {
+            background: rgba(33, 150, 243, 0.3); /* Blue with transparency */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+        }
+
+        .button-container .addvehicle-btn:hover {
+            background: rgba(33, 150, 243, 0.5); /* Darker blue on hover */
+        }
+
+        /* Green Glassmorphism for Check Logs Button */
+        .button-container .checklogs-btn {
+            background: rgba(76, 175, 80, 0.3); /* Green with transparency */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+        }
+
+        .button-container .checklogs-btn:hover {
+            background: rgba(76, 175, 80, 0.5); /* Darker green on hover */
+        }
+
+        /* Red Glassmorphism for Logout Button */
+        .button-container .logout-btn {
+            background: rgba(255, 59, 48, 0.3); /* Red with transparency */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+        }
+
+        .button-container .logout-btn:hover {
+            background: rgba(255, 59, 48, 0.5); /* Darker red on hover */
+        }
+
+        /* Vehicle Grid */
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .vehicle-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .vehicle-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .vehicle-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 5px 0;
+        }
+
+        .vehicle-card .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .vehicle-card .actions button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .vehicle-card .actions button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Delete Button with Red Glassmorphism */
+        .vehicle-card .actions button.delete-btn {
+            background: rgba(255, 59, 48, 0.3); /* Red with transparency */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+        }
+
+        .vehicle-card .actions button.delete-btn:hover {
+            background: rgba(255, 59, 48, 0.5); /* Darker red on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2, h3 {
+                font-size: 24px;
+            }
+
+            .vehicle-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .button-container button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to the Admin Dashboard</h2>
+
+    <!-- Button Container for Add Vehicle, Check Logs, and Logout -->
+    <div class="button-container">
+        <a href="addVehicle.html">
+            <button class="addvehicle-btn">Add Vehicle</button>
+        </a>
+        <a href="logs.html">
+            <button class="checklogs-btn">Check Logs</button>
+        </a>
+        <a href="LogoutServlet">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </div>
+
+    <h3>Registered Vehicles</h3>
+    <div class="vehicle-grid" id="vehicleGrid">
+        <!-- Vehicle cards will be inserted here -->
+    </div>
+
+    <script>
+        function fetchVehicles() {
+            fetch('/GATEAUTOMATION/DashboardServlet')
+            .then(response => response.json())
+            .then(data => {
+                let vehicleGrid = document.getElementById("vehicleGrid");
+                vehicleGrid.innerHTML = "";
+
+                if (data.error) {
+                    console.error("Error: " + data.error);
+                    return;
+                }
+
+                data.forEach(vehicle => {
+                    let card = `
+                        <div class="vehicle-card">
+                            <h3>${vehicle.owner_name || "N/A"}</h3>
+                            <p>Vehicle Number: ${vehicle.license_plate || "N/A"}</p>
+                            <p>Model: ${vehicle.model || "N/A"}</p>
+                            <p>Contact: ${vehicle.contact || "N/A"}</p>
+                            <div class="actions">
+                                <button class="delete-btn" onclick="deleteVehicle('${vehicle._id}')">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    vehicleGrid.innerHTML += card;
+                });
+
+            })
+            .catch(error => console.error("Error fetching vehicle data:", error));
+        }
+
+        // Function to delete a vehicle
+        function deleteVehicle(vehicleId) {
+            if (confirm("Are you sure you want to delete this vehicle?")) {
+                fetch('/GATEAUTOMATION/DeleteVehicleServlet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'vehicleId=' + encodeURIComponent(vehicleId)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.status === "success") {
+                        fetchVehicles(); // Refresh grid after deletion
+                    }
+                })
+                .catch(error => console.error("Error deleting vehicle:", error));
+            }
+        }
+
+        // Load vehicles on page load
+        fetchVehicles();
+    </script>
+</body>
+</html>

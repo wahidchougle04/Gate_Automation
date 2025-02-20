@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vehicle</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Form Styling */
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Input Field Styling */
+        input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            transform: scale(1.02);
+            outline: none;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px 25px;
+            background: #6a11cb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #2575fc;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(37, 117, 252, 0.7);
+        }
+
+        /* Heading Styling */
+        h2 {
+            margin-bottom: 20px;
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        /* Label Styling */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: white;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        /* Fade-In Animation for Form */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Text Glow Animation for Heading */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            }
+        }
+
+        /* Background Animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            animation: rotate 12s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Additional Background Particles */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.1%);
+            background-size: 20px 20px;
+            animation: particles 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes particles {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="AddVehicleServlet" method="post" onsubmit="return validateForm()">
+        <h2>Add New Vehicle</h2>
+        <label for="ownerName">Owner Name:</label>
+        <input type="text" id="ownerName" name="ownerName" required>
+        <label for="vehicleNumber">Vehicle Number:</label>
+        <input type="text" id="vehicleNumber" name="vehicleNumber" required>
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" required>
+        <label for="contactNumber">Contact Number:</label>
+        <input type="text" id="contactNumber" name="contactNumber" required>
+        <button type="submit">Add Vehicle</button>
+    </form>
+    <script>
+        function validateForm() {
+            let vehicleNumber = document.getElementById("vehicleNumber").value;
+            let contactNumber = document.getElementById("contactNumber").value;
+
+            // Vehicle Number Format: 2 Letters + 2 Digits + 2 Letters + 4 Digits
+            let vehicleRegex = /^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/;
+            let mobileRegex = /^[0-9]{10}$/; // Exactly 10 digits
+
+            if (!vehicleRegex.test(vehicleNumber)) {
+                alert("Invalid Vehicle Number! Format should be: AAXXAAXXXX (e.g., MH08AZ1234)");
+                return false;
+            }
+
+            if (!mobileRegex.test(contactNumber)) {
+                alert("Invalid Mobile Number! It should be exactly 10 digits.");
+                return false;
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>
