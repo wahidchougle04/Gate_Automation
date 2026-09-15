@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Gate Camera Feed</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 20px 0;
+    }
+
+    /* Main Layout */
+    .main-container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* Live Video Stream */
+    .video-stream {
+      flex: 2;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-stream video {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+
+    /* Side Panel */
+    .side-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Number Plate Recognition */
+    .number-plate-results {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .number-plate-results h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .number-plate-results p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    /* History Log */
+    .history-log {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .history-log h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .history-log ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .history-log ul li {
+      font-size: 14px;
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .history-log ul li:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .video-stream {
+        width: 100%;
+      }
+
+      .side-panel {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Gate Camera Feed</h1>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Live Video Stream -->
+    <div class="video-stream">
+      <video controls autoplay muted>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Side Panel -->
+    <div class="side-panel">
+      <!-- Number Plate Recognition -->
+      <div class="number-plate-results">
+        <h2>Number Plate Recognition</h2>
+        <p>Detected Plate: ABC123</p>
+        <p>Vehicle Model: Tesla Model S</p>
+        <p>Status: Allowed</p>
+      </div>
+
+      <!-- History Log -->
+      <div class="history-log">
+        <h2>Recent Vehicle Entries</h2>
+        <ul>
+          <li>Vehicle XYZ789 - 10:15 AM</li>
+          <li>Vehicle ABC123 - 09:45 AM</li>
+          <li>Vehicle DEF456 - 09:30 AM</li>
+          <li>Vehicle GHI789 - 09:00 AM</li>
+          <li>Vehicle JKL012 - 08:45 AM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unauthorized Vehicle Alert</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff0000, #000000);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
+        .warning-icon {
+            font-size: 50px;
+            color: yellow;
+        }
+        .vehicle-info {
+            margin: 20px 0;
+        }
+        .vehicle-info img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons button {
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 48%;
+        }
+        .grant {
+            background: green;
+            color: white;
+        }
+        .reject {
+            background: red;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .buttons {
+                flex-direction: column;
+            }
+            .buttons button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="warning-icon">⚠️</div>
+        <h2>Unauthorized Vehicle Detected</h2>
+        <div class="vehicle-info">
+            <p><strong>License Plate:</strong> ABC-1234</p>
+            <p><strong>Timestamp:</strong> 2025-02-16 14:30</p>
+            <img src="vehicle.jpg" alt="Vehicle Image">
+        </div>
+        <div class="buttons">
+            <button class="grant">Grant Temporary Access</button>
+            <button class="reject">Reject Entry</button>
+        </div>
+    </div>
+</body>
+</html>

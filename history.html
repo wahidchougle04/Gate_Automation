@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        button {
+            background: #27ae60;
+            color: white;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #16a085;
+        }
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        tr:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        @media (max-width: 600px) {
+            table {
+                font-size: 14px;
+            }
+            input, select, button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Access History</h2>
+        <div class="filters">
+            <input type="date" id="dateFilter">
+            <input type="text" id="vehicleIdFilter" placeholder="Enter Vehicle ID">
+            <button>Search</button>
+            <button>Export to CSV/PDF</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Vehicle ID</th>
+                    <th>Access Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025-02-16</td>
+                    <td>14:30</td>
+                    <td>ABC-1234</td>
+                    <td>Granted</td>
+                </tr>
+                <tr>
+                    <td>2025-02-15</td>
+                    <td>18:45</td>
+                    <td>XYZ-5678</td>
+                    <td>Denied</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
